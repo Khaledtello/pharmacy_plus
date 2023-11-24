@@ -1,0 +1,52 @@
+name: pharmacy
+description: A new Flutter project.
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.1.5 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  get: ^4.6.6
+  lottie: ^2.7.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: Baloo
+      fonts:
+        - asset: assets/fonts/BALOOBHAIJAAN2-REGULAR.TTF
+          weight: 400
+        - asset: assets/fonts/BALOOBHAIJAAN2-MEDIUM.TTF
+          weight: 500
+        - asset: assets/fonts/BALOOBHAIJAAN2-SEMIBOLD.TTF
+          weight: 600
+        - asset: assets/fonts/BALOOBHAIJAAN2-BOLD.TTF
+          weight: 700
+        - asset: assets/fonts/BALOOBHAIJAAN2-EXTRABOLD.TTF
+          weight: 800
+  
+flutter_assets:
+  assets_path: assets/images/
+  output_path: lib/constants/
+  filename: images.dart
+  field_prefix:
+
+flutter_icons:
+  android: true
+  ios: true
+  web: true
+  image_path: "assets/icons/app_icon.png"
