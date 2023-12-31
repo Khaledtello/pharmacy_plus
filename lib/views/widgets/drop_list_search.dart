@@ -14,8 +14,8 @@ class DropListSearch extends StatefulWidget {
   const DropListSearch({
     super.key,
     required this.list,
-    required this.textFocusNode,
     required this.textController,
+    required this.textFocusNode,
     this.hint = '',
     this.readOnly = false,
     this.enabled = true,
@@ -31,7 +31,6 @@ class _DropListSearchState extends State<DropListSearch> {
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) => initOverlayList());
     textFieldFocusListener();
   }

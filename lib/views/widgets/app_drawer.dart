@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy/constants/colors.dart';
+import 'package:pharmacy/services/auth_service.dart';
+import 'package:pharmacy/services/localization_service.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    AuthService auth = Get.find();
+    LocalizationService local = Get.find();
+
     return Drawer(
       child: Column(
         children: [
@@ -25,17 +30,20 @@ class AppDrawer extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          const DrawerListTile(
-            title: 'Khaled Tello',
+          DrawerListTile(
+            title: auth.user.name!,
             icon: Icons.person,
           ),
-          const DrawerListTile(
-            title: '0958743026',
+          DrawerListTile(
+            title: auth.user.phoneNumber!,
             icon: Icons.phone,
           ),
           DrawerListTile(
             title: 'logout'.tr,
             icon: Icons.logout,
+            onTap: () {
+              auth.logout();
+            },
           ),
           DrawerListTile(
             title: 'language'.tr,
@@ -55,9 +63,7 @@ class AppDrawer extends StatelessWidget {
               Radio(
                 value: 'ar',
                 groupValue: Get.locale.toString(),
-                onChanged: (value) {
-                  Get.updateLocale(const Locale('ar'));
-                },
+                onChanged: (value) => local.changeLocal('ar'),
                 activeColor: AppColors.orange,
               ),
               const Spacer(),
@@ -72,9 +78,7 @@ class AppDrawer extends StatelessWidget {
               Radio(
                 value: 'en',
                 groupValue: Get.locale.toString(),
-                onChanged: (value) {
-                  Get.updateLocale(const Locale('en'));
-                },
+                onChanged: (value) => local.changeLocal('en'),
                 activeColor: AppColors.orange,
               ),
               const Spacer(),
@@ -89,16 +93,19 @@ class AppDrawer extends StatelessWidget {
 class DrawerListTile extends StatelessWidget {
   final String title;
   final IconData icon;
+  final void Function()? onTap;
 
   const DrawerListTile({
     super.key,
     required this.title,
     required this.icon,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       title: Text(
         title,
         style: const TextStyle(

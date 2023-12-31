@@ -11,10 +11,10 @@ class MedicinesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FocusNode focusNode = FocusNode();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: GetBuilder<MedicineController>(
-        init: MedicineController(),
         builder: (controller) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -29,8 +29,14 @@ class MedicinesList extends StatelessWidget {
                 Expanded(
                   flex: 4,
                   child: DropListSearch(
-                    list: controller.categoriesList,
-                    textFocusNode: controller.categoriesFocus,
+                    list: List<String>.from(
+                      controller.categories.map(
+                        (category) => Get.locale.toString() == 'ar'
+                            ? category.arabicName
+                            : category.englishName,
+                      ),
+                    ),
+                    textFocusNode: focusNode,
                     textController: controller.categoriesController,
                     hint: 'choose_category'.tr,
                     readOnly: true,
@@ -57,9 +63,9 @@ class MedicinesList extends StatelessWidget {
             const SizedBox(height: 24),
             Expanded(
               child: ListView.builder(
-                itemCount: controller.filteredMedicines.length,
+                itemCount: controller.medicines.length,
                 itemBuilder: (context, index) {
-                  return MedicineItem(controller.filteredMedicines[index]);
+                  return MedicineItem(controller.medicines[index]);
                 },
               ),
             ),

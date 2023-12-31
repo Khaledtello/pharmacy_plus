@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy/constants/colors.dart';
 import 'package:pharmacy/constants/images.dart';
-import 'package:pharmacy/views/pages/home_page.dart';
+import 'package:pharmacy/controllers/auth_controller.dart';
 import 'package:pharmacy/views/widgets/app_button.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pharmacy/views/widgets/app_text_field.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+class RegisterPage extends GetView<AuthController> {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    //controller.init();
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -40,15 +42,25 @@ class SignUpPage extends StatelessWidget {
             AppTextField(
               hint: 'enter_name'.tr,
               withLabel: true,
+              controller: controller.nameController,
             ),
             const Spacer(flex: 2),
             AppTextField(
               hint: 'enter_mobile'.tr,
               withLabel: true,
+              controller: controller.phoneController,
+            ),
+            const Spacer(flex: 2),
+            AppTextField(
+              hint: 'enter_password'.tr,
+              withLabel: true,
+              controller: controller.passwordController,
             ),
             const Spacer(flex: 10),
             AppButton(
-              onPressed: () => Get.to(() => const HomePage()),
+              onPressed: () async {
+                await controller.register();
+              },
               color: AppColors.blue,
               title: 'login'.tr,
             ),

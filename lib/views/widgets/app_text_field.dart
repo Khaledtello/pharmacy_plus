@@ -13,6 +13,8 @@ class AppTextField extends StatelessWidget {
   final bool readOnly;
   final bool enabled;
   final Color borderColor;
+  final TextInputType? keyboardType;
+  final TextAlign textAlign;
   final void Function(PointerDownEvent)? onTapOutside;
   final void Function(String)? onChanged;
 
@@ -31,6 +33,8 @@ class AppTextField extends StatelessWidget {
     this.borderColor = AppColors.blue,
     this.onTapOutside,
     this.onChanged,
+    this.keyboardType,
+    this.textAlign = TextAlign.start,
   });
 
   @override
@@ -45,6 +49,8 @@ class AppTextField extends StatelessWidget {
         cursorColor: AppColors.blue,
         readOnly: readOnly,
         enabled: enabled,
+        keyboardType: keyboardType,
+        textAlign: textAlign,
         style: TextStyle(
           color: AppColors.blue,
           fontSize: fontSize,

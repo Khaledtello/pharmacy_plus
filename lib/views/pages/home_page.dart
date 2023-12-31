@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pharmacy/constants/colors.dart';
+import 'package:pharmacy/views/pages/basket_page.dart';
 import 'package:pharmacy/views/pages/medicines_list.dart';
 import 'package:pharmacy/views/widgets/app_drawer.dart';
 
@@ -13,26 +14,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int selectedPage = 0;
-  final List<Map<String, Widget>> pages = [
+  final List<Map<String, dynamic>> pages = [
     {
       'page': const MedicinesList(),
-      'title': Text(
-        'medicines_list'.tr,
-        style: const TextStyle(
-          fontSize: 26,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+      'title': 'medicines_list',
     },
     {
-      'page': const MedicinesList(),
-      'title': Text(
-        'orders_list'.tr,
-        style: const TextStyle(
-          fontSize: 26,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+      'page': const BasketPage(),
+      'title': 'basket',
+    },
+    {
+      'page': const SizedBox(),
+      'title': 'orders_list',
     },
   ];
 
@@ -40,7 +33,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: pages[selectedPage]['title'],
+        title: Text(
+          pages[selectedPage]['title'].toString().tr,
+          style: const TextStyle(
+            fontSize: 26,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: true,
         toolbarHeight: 70,
         backgroundColor: AppColors.blue,
@@ -59,6 +58,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: const Icon(Icons.medication_liquid),
             label: 'medicines'.tr,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.shopping_cart_outlined),
+            label: 'basket'.tr,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.delivery_dining),
